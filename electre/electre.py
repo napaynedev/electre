@@ -3,7 +3,7 @@ from copy import deepcopy
 import numpy as np
 from jinja2 import Template
 
-debug = True
+debug = False
 distillation_counter = 0
 
 result_template = Template("""
