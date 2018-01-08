@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/napaynedev/electre.svg?branch=master)](https://travis-ci.org/napaynedev/electre)
 
-[![ReadTheDocs](http://electre.readthedocs.io/en/latest/?badge=latest)](http://electre.readthedocs.io/en/latest/)
+[![ReadTheDocs](https://readthedocs.org/projects/electre/badge/?version=latest)](http://electre.readthedocs.io/en/latest/)
 
 # Overview
 
