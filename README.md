@@ -1,8 +1,12 @@
 [![Build Status](https://travis-ci.org/napaynedev/electre.svg?branch=master)](https://travis-ci.org/napaynedev/electre)
 
+[![ReadTheDocs](http://electre.readthedocs.io/en/latest/?badge=latest)](http://electre.readthedocs.io/en/latest/)
+
 # Overview
 
 This repo is exploring the use of and the development of utilities to implement the ELECTRE III decision methods for software candidates.
+
+[Documentation](http://electre.readthedocs.io/en/latest/)
 
 # Installation
 
