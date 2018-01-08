@@ -1,3 +1,5 @@
+![Travis CI Test Badge](https://travis-ci.org/napaynedev/electre.svg?branch=master)
+
 # Overview
 
 This repo is exploring the use of and the development of utilities to implement the ELECTRE III decision methods for software candidates.
