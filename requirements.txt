@@ -1,3 +1,4 @@
 pandas
 openpyxl
 jinja2
+sphinx
