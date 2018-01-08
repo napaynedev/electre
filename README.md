@@ -1,4 +1,4 @@
-![Travis CI Test Badge](https://travis-ci.org/napaynedev/electre.svg?branch=master)
+[![Build Status](https://travis-ci.org/napaynedev/electre.svg?branch=master)](https://travis-ci.org/napaynedev/electre)
 
 # Overview
 
