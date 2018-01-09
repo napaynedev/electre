@@ -1,6 +1,6 @@
 import argparse
 
-from electre import read_csv, electre
+from .electre import read_csv, electre
 
 def main():
     """ main processing entry point """
@@ -11,8 +11,6 @@ def main():
     df_thresholds_weights = read_csv(args.thresholds_weights_csv)
 
     electre_handler = electre(df_alternatives, df_thresholds_weights)
-
-    results = calculate_partial_concordance(df_alternatives, df_thresholds_weights)
 
 def parse_command_line():
     """ Returns inputs from command line interface

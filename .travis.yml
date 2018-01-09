@@ -4,7 +4,11 @@ python:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
+  - pip install coveralls
 # command to run tests
 script:
   - cd electre
+  - coverage run -m unittest test.electre_tests
+  - coverage report -m
   - python -m unittest test.electre_tests
+after_success: coveralls
