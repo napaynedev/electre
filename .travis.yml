@@ -8,7 +8,7 @@ install:
 # command to run tests
 script:
   - cd electre
-  - coverage run -m unittest test.electre_tests
+  - coverage run --source=electre -m unittest test.electre_tests
   - coverage report -m
   - python -m unittest test.electre_tests
 after_success: coveralls
