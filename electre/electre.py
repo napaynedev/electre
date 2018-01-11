@@ -59,7 +59,6 @@ class electre(object):
         self.ascending_order = self.distillation(ascending=True)
         self.final_ranking_matrix = self.compute_final_ranking_matrix()
         self.nodes = self.compute_final_order()
-        self.write_results()
 
         if debug:
             self.writer.save()
@@ -110,7 +109,7 @@ class electre(object):
     def _remove_duplicate_mappings(self, node_list):
         """ Removes duplicate mappings from all nodes
         Args:
-            node_list (list) : list of alternative_node's
+            node_list (dict) : dictionary of alternative_nodes, id : node
         Kwargs:
             None
         Returns:

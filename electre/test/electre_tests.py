@@ -2,6 +2,7 @@ import unittest
 import pandas as pd
 from pandas.util.testing import assert_frame_equal
 import numpy as np
+import os
 
 from electre import read_csv, electre
 
@@ -289,3 +290,88 @@ class electre_tests(unittest.TestCase):
                      'a6': {'a1': 'P+', 'a2': 'I', 'a3': 'P+', 'a4': 'P+', 'a5': 'P+', 'a6': '-'}}
         final_matrix = electre_handler.compute_final_ranking_matrix()
         assert_frame_equal(final_matrix, pd.DataFrame(final_matrix_test))
+
+    def test_alternative_node(self):
+        electre_handler = self.setup_class()
+        test_id = 'a5'
+        node = electre_handler.alternative_node(test_id)
+        self.assertEqual(node.id, test_id)
+        self.assertTrue(hasattr(node, 'after'))
+        self.assertTrue(hasattr(node, 'equals'))
+        self.assertEqual(node.label, test_id)
+        self.assertFalse(node.hidden)
+
+        self.assertEqual('{}'.format(node), 'a5 -> []')
+        self.assertEqual(str(node), 'a5 -> []')
+
+        node.hide()
+        self.assertTrue(node.hidden)
+
+        self.assertEqual(len(node.after), 0)
+        node_b = electre_handler.alternative_node('a6')
+        node.add_after(node_b)
+        self.assertEqual(len(node.after), 1)
+        self.assertEqual(type(node.after[0]), electre_handler.alternative_node)
+
+        self.assertEqual(len(node.equals), 0)
+        node.add_equals(node_b)
+        self.assertEqual(len(node.equals), 1)
+        self.assertEqual(type(node.equals[0]), electre_handler.alternative_node)
+
+        node.append_name('b')
+        self.assertEqual(node.label, 'a5, b')
+        self.assertEqual(node.id, 'a5')
+
+    def test_remove_duplicate_mappings(self):
+        electre_handler = self.setup_class()
+        test_id = 'a5'
+        node = electre_handler.alternative_node(test_id)
+        node_b = electre_handler.alternative_node('a6')
+        node_c = electre_handler.alternative_node('a7')
+
+        node_b.add_after(node_c)
+        node.add_after(node_b)
+        node.add_after(node_c)
+
+        self.assertEqual(len(node.after), 2)
+
+        electre_handler._remove_duplicate_mappings({'a5': node})
+
+        self.assertEqual(len(node.after), 1)
+        self.assertEqual(node.after[0], node_b)
+        self.assertEqual(node_b.after[0], node_c)
+
+    def test_compute_final_order(self):
+        electre_handler = self.setup_class()
+        nodes = electre_handler.compute_final_order()
+
+        self.node_checker(nodes['a5'], 2, 'a5', 'a5', 0)
+        self.node_checker(nodes['a1'], 1, 'a1', 'a1', 0, single_after_check='a4')
+        self.node_checker(nodes['a4'], 2, 'a4', 'a4', 0)
+        self.node_checker(nodes['a3'], 2, 'a3', 'a3', 0)
+        self.node_checker(nodes['a2'], 0, 'a2', 'a2, a6', 1, single_equals_check='a6')
+        self.node_checker(nodes['a6'], 0, 'a6', 'a6, a2', 1, single_equals_check='a2')
+
+        self.assertFalse(nodes['a5'].hidden or nodes['a3'].hidden or nodes['a1'].hidden or nodes['a4'].hidden)
+
+        self.assertTrue(nodes['a2'].hidden or nodes['a6'].hidden)
+
+    def node_checker(self, node, after_length, id, label, equals_length, single_after_check=None,
+                     single_equals_check=None):
+        self.assertEqual(len(node.after), after_length, '{}'.format(node.after))
+        self.assertEqual(node.id, id)
+        self.assertEqual(node.label, label)
+        self.assertEqual(len(node.equals), equals_length)
+        if single_after_check != None:
+            self.assertEqual(node.after[0].id, single_after_check)
+        if single_equals_check != None:
+            self.assertEqual(node.equals[0].id, single_equals_check)
+
+    def test_write_results(self):
+        result_path = 'order.html'
+        if os.path.exists(result_path):
+            os.unlink(result_path)
+        self.assertFalse(os.path.exists(result_path))
+        electre_handler = self.setup_class()
+        electre_handler.write_results()
+        self.assertTrue(os.path.exists(result_path))
