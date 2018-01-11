@@ -13,14 +13,25 @@ This repo is exploring the use of and the development of utilities to implement 
 Clone the directory, then:
 
 ```
-pip install setup.py
+pip install -e .
 ```
 
 # Usage
 
 ## Command Line Interface
 
-TBD
+```
+usage: electre [-h] alternatives_csv thresholds_weights_csv
+
+positional arguments:
+  alternatives_csv      Path to CSV file containing the alternatives list with
+                        scores
+  thresholds_weights_csv
+                        Path to CSV file containing thresholds and weights
+
+optional arguments:
+  -h, --help            show this help message and exit
+```
 
 ## Data Files
 
