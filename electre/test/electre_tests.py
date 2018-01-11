@@ -4,7 +4,7 @@ from pandas.util.testing import assert_frame_equal
 import numpy as np
 import os
 
-from electre import read_csv, electre
+from electre_lib import read_csv, electre
 
 class electre_tests(unittest.TestCase):
 

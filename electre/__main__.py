@@ -1,6 +1,6 @@
 import argparse
 
-from .electre import read_csv, electre
+from .electre_lib import read_csv, electre
 
 def main():
     """ main processing entry point """
