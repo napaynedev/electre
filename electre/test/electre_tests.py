@@ -293,6 +293,12 @@ class electre_tests(unittest.TestCase):
 
     def test_alternative_node(self):
         electre_handler = self.setup_class()
+
+        test_id = 'a 5'
+        node = electre_handler.alternative_node(test_id)
+        self.assertEqual(node.id, 'a_5')
+        self.assertEqual(node.label, 'a_5')
+
         test_id = 'a5'
         node = electre_handler.alternative_node(test_id)
         self.assertEqual(node.id, test_id)

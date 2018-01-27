@@ -132,10 +132,11 @@ class electre(object):
     class alternative_node(object):
 
         def __init__(self, id):
+            filtered_id = id.replace(' ', '_')
             self.after = list()
             self.equals = list()
-            self.id = id
-            self.label = id
+            self.id = filtered_id
+            self.label = filtered_id
             self.hidden = False
 
         def __str__(self):

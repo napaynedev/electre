@@ -45,6 +45,6 @@ This will enforce flake8 style and quality.
 
 # References
 
-[presentation](file:///C:/Users/npayne3/Downloads/MCDA-ELECTREIII.pdf)
+[presentation](https://www.researchgate.net/publication/319504879_MCDA-04-ELECTRE_III)
 
 [PROJECT RANKING USING ELECTRE III](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.493.6585&rep=rep1&type=pdf)
